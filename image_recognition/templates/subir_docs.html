@@ -1,0 +1,129 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <base target="_top">
+  <style>
+    .archivo {
+      width: 155px;
+    }
+
+    .estado {
+      width: 100px;
+    }
+	body{
+	background-color: #f6f9ff;	
+}
+  </style>
+</head>
+
+<body>
+  {% include 'navbar.html' %}
+
+  <div class="container">
+    <div class="card">
+      <div class="card-body">
+        Bienvenido a "Auto Document Checker". <br>
+      En este sistema, deberás subir tus documentos en el apartado indicado y este se encargará de revisarlos automáticamente. En caso de que tu documento no sea aceptado (no se vea clara la imagen o no sea el documento indicado), deberás volver a subirlo correctamente o con una mayor resolución.<br> Para obtener un mejor resultado, recorta los bordes de la imagen de modo que solo esté el documento presente en ella.
+      </div>
+    </div><br>
+    <div class="card">
+      <div class="card-body">
+
+        <form action="{% url 'upload_id' %}" method="POST" enctype="multipart/form-data" id="idForm">
+          {% csrf_token %}
+          <div class="input-group mb-3">
+            <div class="input-group-prepend archivo">
+              <span class="input-group-text w-100 text-center">INE</span>
+            </div>
+            <div class="custom-file">
+              {{ idForm.identification }}
+            <label class="custom-file-label" for="id_identification">Selecciona un archivo</label>
+            </div>
+            <div class="input-group-append estado">
+              <span class="input-group-text w-100 bg-success text-white">Aceptado<span>
+            </div>
+          </div>
+        </form>
+
+        <form action="{% url 'upload_curp' %}" method="POST" enctype="multipart/form-data" id="curpForm">
+          {% csrf_token %}
+          <div class="input-group mb-3">
+            <div class="input-group-prepend archivo">
+              <span class="input-group-text w-100">CURP</span>
+              </div>
+              <div class="custom-file">
+                {{ curpForm.curp }}
+                <label class="custom-file-label" for="id_curp">Selecciona un archivo</label>
+              </div>
+              <div class="input-group-append estado">
+                <span class="input-group-text w-100 bg-danger text-white">Rechazado<span>
+            </div>
+          </div>
+        </form>
+      
+        <form action="{% url 'upload_rfc' %}" method="POST" enctype="multipart/form-data" id="rfcForm">
+        {% csrf_token %}
+        <div class="input-group mb-3">
+          <div class="input-group-prepend archivo">
+            <span class="input-group-text w-100">RFC</span>
+            </div>
+            <div class="custom-file">
+              {{ rfcForm.rfc }}
+              <label class="custom-file-label" for="id_rfc">Selecciona un archivo</label>
+            </div>
+            <div class="input-group-append estado">
+              <span class="input-group-text w-100 bg-danger text-white">Rechazado<span>
+          </div>
+        </div>
+        </form>
+        
+        <form action="{% url 'upload_acta' %}" method="POST" enctype="multipart/form-data" id="actaForm">
+          {% csrf_token %}
+          <div class="input-group mb-3">
+            <div class="input-group-prepend archivo">
+              <span class="input-group-text w-100">Acta de Nacimiento</span>
+              </div>
+              <div class="custom-file">
+                {{ actaForm.acta }}
+                <label class="custom-file-label" for="id_acta">Selecciona un archivo</label>
+              </div>
+              <div class="input-group-append estado">
+                <span class="input-group-text w-100 bg-warning text-white">Pendiente<span>
+            </div>
+          </div>
+        </form>
+
+        <form action="{% url 'upload_seguro' %}" method="POST" enctype="multipart/form-data" id="seguroForm">
+        {% csrf_token %}
+        <div class="input-group mb-3">
+          <div class="input-group-prepend archivo">
+            <span class="input-group-text w-100">Numero de IMSS</span>
+            </div>
+            <div class="custom-file">
+              {{ seguroForm.seguro }}
+              <label class="custom-file-label" for="id_seguro">Selecciona un archivo</label>
+            </div>
+            <div class="input-group-append estado">
+              <span class="input-group-text w-100 bg-danger text-white">Pendiente<span>
+          </div>
+        </div>
+      </form>
+  </div>
+  <div>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+  </script>
+  <script src="{% static '../static/js/uploadDocs.js' %}"></script>
+</body>
+
+</html>

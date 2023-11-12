@@ -17,19 +17,20 @@ def curp_directory_path(instance, filename):
 def rfc_directory_path(instance, filename):
     return user_directory_path(instance, filename, 'RFC')
 
+def acta_directory_path(instance, filename):
+    return user_directory_path(instance, filename, 'ACTA')
+
+def seguro_directory_path(instance, filename):
+    return user_directory_path(instance, filename, 'NSS')
+
 class Documents(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True, null=True)
     identification = models.ImageField(upload_to=identification_directory_path, null=True)
     curp = models.ImageField(upload_to=curp_directory_path, null=True)
     rfc = models.ImageField(upload_to=rfc_directory_path, null=True)
+    acta = models.ImageField(upload_to=acta_directory_path, null=True)
+    seguro = models.ImageField(upload_to=seguro_directory_path, null=True)
 
     def __str__(self):
         return f'{self.user} docs'
-
-class UserInfo(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True, null=True)
-    birthdate = models.DateField()
-
-    def __str__(self):
-        return f'{self.user} info'
 
